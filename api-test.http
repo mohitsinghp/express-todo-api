@@ -1,13 +1,37 @@
+###
+# @name login
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "username": "steve",
+    "password": "wonder321"
+}
+
+###
 GET http://localhost:3001/
 Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
 
 ###
 POST http://localhost:3001/
 Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
 
 {
-    "title": "add post, put and delete methods"
+    "title": "Create a new task",
+    "status": "unchecked"
 }
 
 ###
+PUT http://localhost:3001/60bcf7920699c91980bcd109
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
 
+{
+     "status": "checked"
+}
+
+### Delete
+DELETE  http://localhost:3001/60bcf7920699c91980bcd109
+Authorization: Bearer {{login.response.body.accessToken}}

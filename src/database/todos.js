@@ -9,12 +9,6 @@ async function insertTodo(todo) {
     return insertedId;
 }
 
-async function insertAd(ad) {
-    const database = await getDatabase();
-    const { insertedId } = await database.collection(collectionName).insertOne(ad);
-    return insertedId;
-}
-
 async function getTodos() {
     const database = await getDatabase();
     return await database.collection(collectionName).find({}).toArray();
@@ -34,7 +28,7 @@ async function updateTodo(id, todo) {
         {_id: new ObjectID(id), },
         {
             $set: {
-                ...addEventListener,
+                ...todo,
             },
         },
     );
