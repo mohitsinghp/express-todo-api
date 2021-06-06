@@ -1,10 +1,17 @@
 const {getDatabase} = require('./mongo');
+const { ObjectID } = require('mongodb');
 
 const collectionName = 'todos';
 
 async function insertTodo(todo) {
     const database = await getDatabase();
-    const {insertedId} = await database.collection(collectionName).insertOne(todo);
+    const { insertedId } = await database.collection(collectionName).insertOne(todo);
+    return insertedId;
+}
+
+async function insertAd(ad) {
+    const database = await getDatabase();
+    const { insertedId } = await database.collection(collectionName).insertOne(ad);
     return insertedId;
 }
 
@@ -13,7 +20,29 @@ async function getTodos() {
     return await database.collection(collectionName).find({}).toArray();
 }
 
+async function deleteTodo(id) {
+    const database = await getDatabase();
+    await database.collection(collectionName).deleteOne({
+        _id: new ObjectID(id)
+    });
+}
+
+async function updateTodo(id, todo) {
+    const database = await getDatabase();
+    delete todo._id;
+    await database.collection(collectionName).update(
+        {_id: new ObjectID(id), },
+        {
+            $set: {
+                ...addEventListener,
+            },
+        },
+    );
+}
+
 module.exports = {
     insertTodo,
-    getTodos
+    getTodos,
+    deleteTodo,
+    updateTodo
 }
