@@ -21,6 +21,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
+    "mongodb": "^3.6.9",
+    "mongodb-memory-server": "^6.9.6",
     "morgan": "^1.10.0"
   }
 }
