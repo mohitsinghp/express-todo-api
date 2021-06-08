@@ -9,6 +9,11 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3001/verify
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
+
+###
 GET http://localhost:3001/
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.accessToken}}

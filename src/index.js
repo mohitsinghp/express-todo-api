@@ -62,6 +62,11 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
+
+app.post('/valid', authenticateJWT, async (req, res) => {
+    res.send({ message: 'Valid Token'});
+})
+
 app.get('/', authenticateJWT, async (req, res) => {
     res.send(await getTodos());
 });
